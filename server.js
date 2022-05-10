@@ -4,8 +4,8 @@ const crypto = require('crypto');
 const discord = require('discord.js');
 const client = new discord.Client();
 
-const mainChannelId = "725595164105768983";
-const debugChannelId = "725962668829048864";
+const mainChannelId = "973553349842587648";
+const debugChannelId = "973553349842587648";
 const password = "potatoisgodpotatoisgodpotatoisgod";
 
 http.createServer(function(req, res){
@@ -50,30 +50,6 @@ http.createServer(function(req, res){
         let emb = {embed: JSON.parse(dataObject.content)};
         sendMsg(msgChannelId, "", emb);
       }
-      if(dataObject.type == "newTakerunVideo"){
-        let msgChannelId = debugChannelId;
-        if(dataObject.debug !== undefined && dataObject.debug == "false"){
-          msgChannelId = mainChannelId;
-        }
-        let msgMention = "<@270557414510690305>";
-        let videoId = dataObject.url.replace("https://youtu.be/", "");
-        let emb = {embed: {
-          author: {
-            name: "takerun3367",
-            url: "https://www.youtube.com/channel/UCyM2Qcy6iD43d8BgiPj3ClQ",
-            icon_url: "https://yt3.ggpht.com/a/AATXAJzj95tFkxDHHJ2FMMzMkO0AOI0Tk-Zb4Ld0mw=s100-c-k-c0xffffffff-no-rj-mo"
-          },
-          title: dataObject.title,
-          url: dataObject.url,
-          description: dataObject.description,
-          color: 7506394,
-          timestamp: new Date(),
-          thumbnail: {
-            url: "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg"
-          }
-        }};
-        sendMsg(msgChannelId, msgMention + " の新着動画！", emb);
-      }
       res.end();
     });
   }
@@ -101,8 +77,8 @@ client.on('message', message =>{
       .catch(console.error);
   }
 
-  if (message.content === "にゃ～ん"){
-    let reply_text = "にゃ～ん";
+  if (message.content === "しごおわ"){
+    let reply_text = "おつ";
     message.reply(reply_text)
       .then(message => console.log("Sent message: " + reply_text))
       .catch(console.error);
@@ -111,8 +87,8 @@ client.on('message', message =>{
 
   if (message.content.match(/^！おみくじ/) ||
       (message.isMemberMentioned(client.user) && message.content.match(/おみくじ/))){
-    let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
-    let weight = [5, 30, 10, 15, 20, 20];
+    let arr = ["SRマリィ", "SRローズ", "SSRイエッサンV", "2", "にゃ～ん", "しゅうまい君"];
+    let weight = [1, 5, 10, 15, 20, 20];
     lotteryByWeight(message.channel.id, arr, weight);
   }else if (message.isMemberMentioned(client.user)){
     sendReply(message, "呼びましたか？");
