@@ -128,16 +128,16 @@ function lotteryByWeight(channelId){
   for (var i = 0; i < weight.length; i++){
     totalWeight += weight[i];
   }
-  sendMsg(channelId, sr());
-  let random = Math.floor( Math.random() * totalWeight);
-  for (var i = 0; i < weight.length; i++){
-    if (random < weight[i]){
-      sendMsg(channelId, arr[i]);
-      return;
-    }else{
-      random -= weight[i];
-    }
-  }
+  sendMsg(channelId, sr() + ssr() + ur());
+  // let random = Math.floor( Math.random() * totalWeight);
+  // for (var i = 0; i < weight.length; i++){
+  //   if (random < weight[i]){
+  //     sendMsg(channelId, arr[i]);
+  //     return;
+  //   }else{
+  //     random -= weight[i];
+  //   }
+  // }
   console.log("lottery error");
 }
 
@@ -168,6 +168,66 @@ function sr() {
   // 1等や2等などを設定した確率で表示
 }
 
+function ur() {
+  const data = {
+    'URムゲンダイナV': 3, 
+    'URムゲンダイナVMAX': 3, 
+    'URザシアンV': 3, 
+    'URザマゼンタV': 3, 
+  }
+  const rand = Math.floor(Math.random() * 100)
+  let result = 'URなし'
+  let rate = 0
+  for (const prop in data) {
+    rate += data[prop]
+    if (rand <= rate) {
+      result = prop
+      break
+    }
+  }
+  return result
+  // 1等や2等などを設定した確率で表示
+}
+
+function ssr() {
+  const data = {
+    'SSRイエッサンV': 5, 
+    'SSRウッウV': 5, 
+    'SSRオーロンゲV': 5, 
+    'SSRオーロンゲVMAX': 5, 
+    'SSRクロバットVMAX': 5, 
+    'SSRゴリランダーV': 5, 
+    'SSRゴリランダーVMAX': 5, 
+    'SSRストリンダーV': 5, 
+    'SSRストリンダーVMAX': 4, 
+    'SSRタイレーツV': 4, 
+    'SSRドラパルトV': 4, 
+    'SSRドラパルトVMAX': 4, 
+    'SSRバイウールーV': 4, 
+    'SSRパルスワンV': 4, 
+    'SSRマルヤクデV': 4, 
+    'SSRマルヤクデVMAX': 4, 
+    'SSRメタモンV': 4, 
+    'SSRメタモンVMAX': 4, 
+    'SSRラプラスV': 4, 
+    'SSRラプラスVMAX': 4, 
+    'SSRリザードンV': 4, 
+    'SSRリザードンVMAX': 4, 
+    'SSRワタシラガV': 4, 
+  }
+  const rand = Math.floor(Math.random() * 100)
+  let result = 'SSRなし'
+  let rate = 0
+  for (const prop in data) {
+    rate += data[prop]
+    if (rand <= rate) {
+      result = prop
+      break
+    }
+  }
+  return result
+  // 1等や2等などを設定した確率で表示
+}
 
 function sendReply(message, text){
   message.reply(text)
