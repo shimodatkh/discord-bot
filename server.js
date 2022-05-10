@@ -50,30 +50,6 @@ http.createServer(function(req, res){
         let emb = {embed: JSON.parse(dataObject.content)};
         sendMsg(msgChannelId, "", emb);
       }
-      if(dataObject.type == "newTakerunVideo"){
-        let msgChannelId = debugChannelId;
-        if(dataObject.debug !== undefined && dataObject.debug == "false"){
-          msgChannelId = mainChannelId;
-        }
-        let msgMention = "<@270557414510690305>";
-        let videoId = dataObject.url.replace("https://youtu.be/", "");
-        let emb = {embed: {
-          author: {
-            name: "takerun3367",
-            url: "https://www.youtube.com/channel/UCyM2Qcy6iD43d8BgiPj3ClQ",
-            icon_url: "https://yt3.ggpht.com/a/AATXAJzj95tFkxDHHJ2FMMzMkO0AOI0Tk-Zb4Ld0mw=s100-c-k-c0xffffffff-no-rj-mo"
-          },
-          title: dataObject.title,
-          url: dataObject.url,
-          description: dataObject.description,
-          color: 7506394,
-          timestamp: new Date(),
-          thumbnail: {
-            url: "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg"
-          }
-        }};
-        sendMsg(msgChannelId, msgMention + " の新着動画！", emb);
-      }
       res.end();
     });
   }
@@ -109,11 +85,11 @@ client.on('message', message =>{
     return;
   }
 
-  if (message.content.match(/^！おみくじ/) ||
-      (message.isMemberMentioned(client.user) && message.content.match(/おみくじ/))){
-    let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
-    let weight = [5, 30, 10, 15, 20, 20];
-    lotteryByWeight(message.channel.id, arr, weight);
+  if ((message.content.match(/^！シャイニー/)) ||
+      (message.isMemberMentioned(client.user) && message.content.match(/シャイニー/))){
+    // let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
+    // let weight = [5, 30, 10, 15, 20, 20];
+    lotteryByWeight(message.channel.id);
   }else if (message.isMemberMentioned(client.user)){
     sendReply(message, "呼びましたか？");
   }
@@ -144,11 +120,15 @@ function lottery(channelId, arr){
   sendMsg(channelId, arr[random]);
 }
 
-function lotteryByWeight(channelId, arr, weight){
+function lotteryByWeight(channelId){
+  let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
+  let weight = [5, 30, 10, 15, 20, 20];
+  let result = "";
   let totalWeight = 0;
   for (var i = 0; i < weight.length; i++){
     totalWeight += weight[i];
   }
+  sendMsg(channelId, sr());
   let random = Math.floor( Math.random() * totalWeight);
   for (var i = 0; i < weight.length; i++){
     if (random < weight[i]){
@@ -160,6 +140,34 @@ function lotteryByWeight(channelId, arr, weight){
   }
   console.log("lottery error");
 }
+
+function sr() {
+  const data = {
+    'SRウカッツ': 6, 
+'SRジムトレーナー': 6, 
+'SRとりつかい': 6, 
+'SRネズ': 6, 
+'SRフウロ': 6, 
+'SRボールガイ': 6, 
+'SRポケモンごっこ': 6, 
+'SRマリィ': 6, 
+'SRローズ': 6, 
+    // はずれ 40%
+  }
+  const rand = Math.floor(Math.random() * 100)
+  let result = 'SRなし'
+  let rate = 0
+  for (const prop in data) {
+    rate += data[prop]
+    if (rand <= rate) {
+      result = prop
+      break
+    }
+  }
+  return result
+  // 1等や2等などを設定した確率で表示
+}
+
 
 function sendReply(message, text){
   message.reply(text)
