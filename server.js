@@ -123,7 +123,7 @@ function lottery(channelId, arr){
 function lotteryByWeight(channelId){
   let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
   let weight = [5, 30, 10, 15, 20, 20];
-  let result = "";
+  let result = "シャイニースターV 1BOXを開封した結果：\n";
   let totalWeight = 0;
   for (var i = 0; i < weight.length; i++){
     totalWeight += weight[i];
