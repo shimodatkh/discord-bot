@@ -127,7 +127,7 @@ function lotteryByWeight(channelId){
   // for (var i = 0; i < weight.length; i++){
   //   totalWeight += weight[i];
   // }
-  let lotresult = "```シャイニースターV 1BOXを開封した結果：\n"+sr() +"\n"+ ssr()+"\n" + ur()+"```";
+  let lotresult = "シャイニースターV 1BOXを開封した結果：\n```"+sr() +"\n"+ ssr()+"\n" + ur()+"```";
   sendMsg(channelId, lotresult);
   // let random = Math.floor( Math.random() * totalWeight);
   // for (var i = 0; i < weight.length; i++){
