@@ -4,8 +4,8 @@ const crypto = require('crypto');
 const discord = require('discord.js');
 const client = new discord.Client();
 
-const mainChannelId = "725595164105768983";
-const debugChannelId = "725962668829048864";
+const mainChannelId = "973609374788501547";
+const debugChannelId = "973609374788501547";
 const password = "potatoisgodpotatoisgodpotatoisgod";
 
 http.createServer(function(req, res){
