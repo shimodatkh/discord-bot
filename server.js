@@ -85,13 +85,16 @@ client.on('message', message =>{
     return;
   }
 
+  if (message.isMemberMentioned(client.user) && message.content.match(/予想/) && message.content.match(/頭/)){
+    const num_uma = data.replace(/[^0-9]/g, '');
+    lotteryRace(message.channel.id,num_uma);
+  }
+
   if ((message.content.match(/^！シャイニー/)) ||
       (message.isMemberMentioned(client.user) && message.content.match(/シャイニー/))){
     // let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
     // let weight = [5, 30, 10, 15, 20, 20];
     lotteryByWeight(message.channel.id);
-  }else if (message.isMemberMentioned(client.user)){
-    sendReply(message, "呼びましたか？");
   }
 });
 
@@ -120,25 +123,35 @@ function lottery(channelId, arr){
   sendMsg(channelId, arr[random]);
 }
 
+function lotteryRace(channelId,num_uma){
+  sendMsg(channelId, race(num_uma));
+  console.log("lotteryrace error");
+}
+
 function lotteryByWeight(channelId){
-  // let arr = ["大吉", "吉", "凶", "ぽてと", "にゃ～ん", "しゅうまい君"];
-  // let weight = [5, 30, 10, 15, 20, 20];
-  // let totalWeight = 0;
-  // for (var i = 0; i < weight.length; i++){
-  //   totalWeight += weight[i];
-  // }
   let lotresult = "シャイニースターV 1BOXを開封した結果：\n```\n"+sr() +"\n"+ ssr()+"\n" + ur()+"```\n";
   sendMsg(channelId, lotresult);
-  // let random = Math.floor( Math.random() * totalWeight);
-  // for (var i = 0; i < weight.length; i++){
-  //   if (random < weight[i]){
-  //     sendMsg(channelId, arr[i]);
-  //     return;
-  //   }else{
-  //     random -= weight[i];
-  //   }
-  // }
   console.log("lottery error");
+}
+
+function race(num_uma) {
+  let fir = Math.floor(Math.random() * num_uma) + 1
+  let sec = 0
+  let thi = 0
+  while (true) {
+    sec = Math.floor(Math.random() * num_uma) + 1
+    if (fir != sec) {
+      break
+    }    
+  }
+  while (true) {
+    thi = Math.floor(Math.random() * num_uma) + 1
+    if (thi != sec && thi != fir) {
+      break
+    }    
+  }
+  return fir + "-" + sec + "-" + thi
+  // 1等や2等などを設定した確率で表示
 }
 
 function sr() {
