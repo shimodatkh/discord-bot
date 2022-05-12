@@ -136,17 +136,18 @@ function lotteryByWeight(channelId){
 }
 
 function race(num_uma) {
-  let fir = Math.floor(Math.random() * num_uma + 1)
+  let fir = Math.floor(Math.random() * num_uma)
   let sec = 0
   let thi = 0
+  console.log(fir);
   while (true) {
-    sec = Math.floor(Math.random() * num_uma + 1) 
+    sec = Math.floor(Math.random() * num_uma) 
     if (fir != sec) {
       break
     }    
   }
   while (true) {
-    thi = Math.floor(Math.random() * num_uma + 1) 
+    thi = Math.floor(Math.random() * num_uma) 
     if (thi != sec && thi != fir) {
       break
     }    
