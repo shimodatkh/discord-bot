@@ -140,6 +140,9 @@ function lotteryByWeight(channelId){
 }
 
 function race(num_uma) {
+  if (num_uma < 3 || num_uma > 18) {
+    return "3頭以上18頭以下を指定してください"; 
+  }
   let fir = Math.floor(Math.random() * num_uma) +1
   let sec = 0
   let thi = 0
