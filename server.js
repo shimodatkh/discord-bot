@@ -86,6 +86,7 @@ client.on('message', message =>{
   }
 
   if (message.isMemberMentioned(client.user) && message.content.match(/予想/) && message.content.match(/頭/)){
+    console.log(message.content);
     const num_uma =  Number(message.content.replace(/[^0-9]/g, ''));
     console.log("予想 頭数："+num_uma);
     lotteryRace(message.channel.id,num_uma);
