@@ -86,10 +86,10 @@ client.on('message', message =>{
   }
 
   if (message.isMemberMentioned(client.user) && message.content.match(/予想/) && message.content.match(/頭/)){
-    console.log(message.content.match(/予想(?<digit>[^0-9])/));
-    console.log(message.content.match(/予想(?<digit>[^0-9])/).groups.digit);
-    let numr = message.content.match(/予想(?<digit>[^0-9])/).groups.digit;
-    const num_uma =  Number(message.content.replace(/[^0-9]/g, ''));
+    console.log(message.content.match(/予想(?<digit>[0-9+])/));
+    console.log(message.content.match(/予想(?<digit>[0-9+])/).groups.digit);
+    let numr = message.content.match(/予想(?<digit>[0-9+])/).groups.digit;
+    const num_uma =  Number(message.content.replace(/[0-9+]/g, ''));
     console.log("予想 頭数："+numr);
     lotteryRace(message.channel.id,numr);
   }
