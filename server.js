@@ -87,6 +87,7 @@ client.on('message', message =>{
 
   if (message.isMemberMentioned(client.user) && message.content.match(/予想/) && message.content.match(/頭/)){
     const num_uma = message.content.replace(/[^0-9]/g, '');
+    console.log("予想 頭数："+num_uma);
     lotteryRace(message.channel.id,num_uma);
   }
 
@@ -150,7 +151,7 @@ function race(num_uma) {
       break
     }    
   }
-  return fir + "-" + sec + "-" + thi
+  return fir.toString(10) + "-" + sec.toString(10) + "-" + thi.toString(10)
   // 1等や2等などを設定した確率で表示
 }
 
