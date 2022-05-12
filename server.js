@@ -159,7 +159,7 @@ function race(num_uma) {
       break
     }    
   }
-  return fir.toString(10) + "-" + sec.toString(10) + "-" + thi.toString(10)
+  return "上位3着はズバリ " + fir.toString(10) + "-" + sec.toString(10) + "-" + thi.toString(10) + " これっきゃありませんよ！"
   // 1等や2等などを設定した確率で表示
 }
 
